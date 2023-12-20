@@ -1,0 +1,223 @@
+<<include etc/colors_fonts_patterns.conf>>
+#系统与debug参数：
+<<include etc/housekeeping.conf>>
+#housekeeping中有设置单个文件行数大小，当文件过大注意调整里面的参数
+<colors>
+
+#添加test1，test2，分别是下图右边内圈的2种颜色（白色，浅蓝色）。
+
+tu_t1=220, 203, 168
+tu_t2=186, 152, 84
+tu_t3=169, 127, 42
+
+zong_t1=237, 237, 216
+zong_t2=177, 177, 126
+zong_t3=127, 127, 42
+
+lan_t1=218, 230, 255
+lan_t2=151, 185, 255
+lan_t3=124, 167, 253
+
+zi_t1=214, 186, 223
+zi_t2=230, 152, 255
+zi_t3=165, 36, 210
+
+new_b1=226,95,51
+new_b2=250,168,88
+new_b3=157,211,226
+new_b4=243,212,74
+new_b5=86,147,197
+
+<<include etc/colors.conf>> #使用默认的颜色
+
+</colors>
+
+<image>
+#设置图片参数 <image>
+dir*    = .    # 输出文件夹
+file*   = Hdhv3_circosv2.png #输出文件的名称
+#radius* = 500p # 图片半径,默认为1500p
+svg*    = yes   # 是否输出svg
+<<include etc/image.conf>>
+</image>
+
+
+
+## 以上为默认参数，不用改
+karyotype=Hdhv3.karyotype  ##染色体文件
+chromosomes_units = 1000000  #设置长度单位，1M长度的序列代表为1u。
+
+<ideogram>  #设置染色体信息
+<spacing>   #设置圈图中染色体之间的空隙大小，以下设置为每个空隙大小为周长的0.5%
+default = 0.005r
+<pairwise chr1;chr18>
+spacing = 5r
+</pairwise> 
+</sapcing> #结束设置空隙大小
+
+radius = 0.9r #设置染色体离圆心的位置，离圆心80%周长
+thickness = 60p #染色体宽度为30像素
+fill = yes # 设置染色体填充的颜色，由karyotype的最后一行决定
+stroke_color = black #设定染色体轮廓的颜色及其厚度
+stroke_thickness = 1p #设定染色体轮廓厚度
+show_label = yes #是否展示label,对应karyotype的第四列
+lable_font = default #字体为默认
+label_radius = dims(ideogram,radius)+0.07r #标签的位置，也可是1r+100p
+label_size = 30 #标签大小
+label_parallel = yes #是否平行放置
+label_format   = eval(sprintf("%s",var(chr))) #标签格式，将第四列的数字前加上chr
+</ideogram>
+
+#chromosomes_display_default = yes
+#chromosomes_radius = chr1_S:0.95r;chr18_D:0.9r #突出特定染色体
+
+show_ticks = yes #展示刻度
+show_tick_labels = yes #展示刻度标签
+
+<ticks> #控制刻度的全局参数
+
+radius = 1r  #位置
+color = black  #颜色
+thickness = 1p #厚度
+multiplier = 1e-6 #输出的标签为实际长度与其相乘，这个值与chromosomes_units有关
+format = %d #标签的格式为整数
+
+<tick> #控制单个刻度的参数
+spacing = 10u #刻度之间的距离
+size = 10p #刻度的长度
+show_label = no
+</tick>
+
+<tick>
+spacing = 20u
+size = 8p
+thickness = 0.6p
+show_label = yes
+label_size = 20p #标签的大小
+label_offset =5p #标签与刻度之间的距离
+suffix = Mb
+format = %d
+</tick>
+
+</ticks>
+
+<plots>
+
+
+<plot>
+file = Hdhv3_chr.1M.te_dna
+type = line
+thickness = 0.6p
+r0 = 0.84r #内圈位置
+r1 = 0.99r #外圈位置
+color=232,65,51
+fill_color = new_b1
+#scale_log_base = yes
+#scale_log_base = eval(0.05*(1+counter(plot)))
+#scale_log_base 参数用于控制热图值映射到颜色的方式，默认值为 1，表示线性映射。
+#在保持颜色列表不变的情况下，通过改变 scale_log_base 的值，log_scale_base < 1 会增加小值颜色的范围，log_scale_base > 1 会增加大值颜色的范围。
+
+<backgrounds> #设定直方图的背景颜色
+<background>
+color=255,255,255
+</background>
+</backgrounds>
+</plot>
+
+<plot>
+file = Hdhv3_chr.1M.te_line
+type = line
+r0 = 0.66r
+r1 = 0.815r
+thickness = 0.6p
+#color=49,52,94
+#fill_color = 85,169,175
+color = 239,83,35
+fill_color = new_b2
+<backgrounds> #设定直方图的背景颜色
+<background>
+color=255,255,255
+</background>
+</backgrounds>
+</plot>
+
+<plot>
+file = Hdhv3_chr.1M.te_ltr
+type = line
+thickness = 0.6p
+r0 = 0.48r
+r1 = 0.63r
+#orientation = out
+#color = 16,109,113
+#fill_color = 92,128,186
+fill_color = new_b4
+color=251,194,28
+<backgrounds> #设定直方图的背景颜色
+<background>
+color=255,255,255
+</background>
+</backgrounds>
+</plot>
+
+<plot>
+file = Hdhv3_chr.1M.te_sine
+type = line
+r0 = 0.30r
+r1 = 0.45r
+thickness = 0.6p
+#glyph = triangle #点的形状，circle圆形，triangle三角形，rectangle矩形
+#glyph_size = 10
+#color=211,53,59
+#fill_color = 91,56,131
+fill_color = new_b3
+color=new_b5
+
+
+#stroke_color = black #边框颜色
+<backgrounds> #设定直方图的背景颜色
+<background>
+color=255,255,255
+</background>
+</backgrounds>
+</plot>
+ 
+# <plot>
+# file = Hdhv3_chr.1M.GC
+# type = line
+# thickness = 0p
+# r0 = 0.28r #内圈位置
+# r1 = 0.4r #外圈位置
+# #orientation = out #y = 0位于r0上
+# color = 244,130,33
+# fill_color = 250,175,60
+# <backgrounds> #设定直方图的背景颜色
+# <background>
+# color=255,255,255
+# </background>
+# </backgrounds>
+# </plot>
+# 
+# <plot>
+# file = Hdhv3_chr.1M.gene
+# type = line
+# thickness = 3p
+# map_gap = 1u
+# r0 = 0.13r #内圈位置
+# r1 = 0.25r #外圈位置
+# #orientation = out #y = 0位于r0上
+# color = 202,38,40
+# #fill_color = 202,38,40
+# 
+# <backgrounds> #设定直方图的背景颜色
+# <background>
+# color = vvlred
+# r0 = 0r
+# r1 = 1r
+# </background>
+# </backgrounds>
+# 
+# </plot>
+
+
+</plots>
+
