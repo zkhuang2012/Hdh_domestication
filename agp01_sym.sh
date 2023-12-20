@@ -9,5 +9,5 @@ fi
 
 git add -A
 git commit -m "$msg"
-git push -f origin main
+git push -f origin master
 
