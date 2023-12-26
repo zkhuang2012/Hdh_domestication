@@ -1,0 +1,5 @@
+Northern China Population,CNN	37°55'16.92"北	120°44'11.69"东
+Southern China Population,CNS	24°31'40.49"北	118°34'56.05"东
+Korea Population,KOR	35°11'30.59"北	126°47'26.79"东
+Southern Japan Popultaion,JAS	32°45'1.03"北	129°52'39.60"东
+Northern Japan Population,JAN	43°13'4.36"北	145°32'21.32"东
